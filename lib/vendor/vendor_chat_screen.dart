@@ -33,7 +33,7 @@ class _VendorChatPageState extends State<VendorChatPage> {
         .where('sellerId', isEqualTo: widget.sellerId)
         .where('productId', isEqualTo: widget.productId)
         .orderBy('timestamp', descending: true)
-        .limit(10)
+        .limit(60)
         .snapshots();
   }
 
@@ -45,7 +45,7 @@ class _VendorChatPageState extends State<VendorChatPage> {
     if (message.isNotEmpty) {
       await _firestore.collection('chats').add({
         'productId': widget.productId,
-        'buyerName':widget.data['buyerName'],
+        'buyerName': widget.data['buyerName'],
         'buyerPhoto': widget.data['buyerPhoto'],
         'sellerPhoto': (userDoc.data() as Map<String, dynamic>)['storeImage'],
         'buyerId': widget.buyerId,

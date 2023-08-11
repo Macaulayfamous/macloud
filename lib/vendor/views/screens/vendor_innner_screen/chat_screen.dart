@@ -12,8 +12,7 @@ class VendorHomeChatScreen extends StatelessWidget {
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
         .collection('chats')
         .where('sellerId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        // .orderBy('timestamp', descending: true) // Add orderBy clause
-        .limit(10)
+        // Add orderBy clause
         .snapshots();
 
     return Scaffold(
@@ -53,7 +52,7 @@ class VendorHomeChatScreen extends StatelessWidget {
               ),
             );
           }
-          List<String> buyerIds = [];
+          Map<String, String> lastProductByBuyerId = {};
 
           return ListView.builder(
             padding: EdgeInsets.all(8.0),
@@ -64,42 +63,44 @@ class VendorHomeChatScreen extends StatelessWidget {
                   document.data()! as Map<String, dynamic>;
               String message = data['message'].toString();
               String senderId = data['senderId'].toString();
-
-              // Check if the message is from a new buyer
-              bool isNewBuyer = !buyerIds.contains(senderId);
-              buyerIds.add(senderId);
+              String productId = data['productId'].toString();
 
               // Check if the message is from the seller
               bool isSellerMessage =
                   senderId == FirebaseAuth.instance.currentUser!.uid;
 
-              if (isNewBuyer && !isSellerMessage) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VendorChatPage(
-                          sellerId: FirebaseAuth.instance.currentUser!.uid,
-                          buyerId: senderId,
-                          productId: data['productId'],
-                          data: data,
+              if (!isSellerMessage) {
+                String key = senderId + '_' + productId;
+                if (!lastProductByBuyerId.containsKey(key)) {
+                  lastProductByBuyerId[key] = productId;
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VendorChatPage(
+                            sellerId: FirebaseAuth.instance.currentUser!.uid,
+                            buyerId: senderId,
+                            productId: productId,
+                            data: data,
+                          ),
                         ),
+                      );
+                    },
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(data['buyerPhoto']),
                       ),
-                    );
-                  },
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(data['buyerPhoto']),
+                      title: Text(message),
+                      subtitle: Text('Sent by Buyer'),
                     ),
-                    title: Text(message),
-                    subtitle: Text('Sent by Buyer'),
-                  ),
-                );
-              } else {
-                return SizedBox.shrink(); // Hide duplicate messages
+                  );
+                }
               }
+
+              return SizedBox
+                  .shrink(); // Hide duplicate or non-matching messages
             },
           );
         },

@@ -35,7 +35,7 @@ class _InnerChatScreenState extends State<InnerChatScreen> {
           isEqualTo: widget.productId,
         )
         .orderBy('timestamp', descending: true)
-        .limit(10)
+        .limit(60)
         .snapshots();
   }
 

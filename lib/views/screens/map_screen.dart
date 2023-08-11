@@ -112,7 +112,7 @@ class _MapScreenState extends State<MapScreen> {
                                 Provider.of<AppData>(context, listen: false)
                                     .pickUpAddress!
                                     .placeName;
-                            EasyLoading.show(status: 'Saving Address...');
+                            EasyLoading.show(status: 'Saving Location...');
                             await FirebaseFirestore.instance
                                 .collection('buyers')
                                 .doc(FirebaseAuth.instance.currentUser!.uid)

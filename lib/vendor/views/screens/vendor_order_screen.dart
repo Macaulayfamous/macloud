@@ -153,7 +153,7 @@ class VendorOrderScreen extends StatelessWidget {
                                       children: [
                                         Text(document['fullName']),
                                         Text(document['email']),
-                                        Text(document['address']),
+                                        Text(document['placeName']),
                                       ],
                                     ),
                                   )
