@@ -16,12 +16,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<AppData>(context).pickUpAddress != null) {
+     if (Provider.of<AppData>(context).pickUpAddress != null) {
       String _address =
-          Provider.of<AppData>(context).pickUpAddress!.placeName.toString();
+           Provider.of<AppData>(context).pickUpAddress!.placeName.toString();
 
       _currentLocationController.text = _address;
-    }
+     }
     ;
 
     return Padding(

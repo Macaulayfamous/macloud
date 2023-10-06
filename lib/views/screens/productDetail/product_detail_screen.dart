@@ -4,7 +4,9 @@ import 'package:custom_rating_bar/custom_rating_bar.dart' as rate;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:rating_summary/rating_summary.dart';
+import 'package:uber_app/provider/cart_provider.dart';
 import 'package:uber_app/views/screens/productDetail/vendor_store_detail_screen.dart';
 import 'package:uber_app/views/screens/widgets/inner_chat_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,18 +21,18 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/app_data.dart';
-import '../../../provider/cart_provider.dart';
 
-class ProductDetailScreen extends StatefulWidget {
+class ProductDetailScreen extends riverpod.ConsumerStatefulWidget {
   final dynamic productData;
 
   ProductDetailScreen({super.key, required this.productData});
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  _ProductDetailScreenState createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _ProductDetailScreenState
+    extends riverpod.ConsumerState<ProductDetailScreen> {
   double calculateAverageRating(List<double> ratings) {
     if (ratings.isEmpty) {
       return 0.0;
@@ -80,7 +82,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     double? latitude = Provider.of<AppData>(context).pickUpAddress!.latitude;
 
     double? logitude = Provider.of<AppData>(context).pickUpAddress!.longitude;
-    final CartProvider _cartProvider = Provider.of<CartProvider>(context);
+    final _cartProvider = ref.read(cartProvider.notifier);
     LatLng customerLatLng = LatLng(
         latitude!, logitude!); // Replace with customer address coordinates
     LatLng vendorLatLng =
@@ -487,21 +489,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
-                  onTap: _cartProvider.getCartItem
+                  onTap: _cartProvider.getCartItems
                           .containsKey(widget.productData['productId'])
                       ? null
                       : () {
                           if (widget.productData['category'] != 'clothes') {
                             _cartProvider.addProductToCart(
-                                widget.productData['productName'],
-                                widget.productData['productId'],
-                                widget.productData['imageUrl'],
-                                1,
-                                widget.productData['quantity'],
-                                widget.productData['productPrice'],
-                                widget.productData['vendorId'],
-                                '',
-                                widget.productData['scheduleDate']);
+                              widget.productData['productName'],
+                              widget.productData['productId'],
+                              widget.productData['imageUrl'],
+                              1,
+                              widget.productData['quantity'],
+                              widget.productData['productPrice'],
+                              widget.productData['vendorId'],
+                              '',
+                            );
 
                             Get.snackbar(
                               'ITEM ADDED',
@@ -522,15 +524,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               );
                             } else {
                               _cartProvider.addProductToCart(
-                                  widget.productData['productName'],
-                                  widget.productData['productId'],
-                                  widget.productData['imageUrl'],
-                                  1,
-                                  widget.productData['quantity'],
-                                  widget.productData['productPrice'],
-                                  widget.productData['vendorId'],
-                                  _selectedSize!,
-                                  widget.productData['scheduleDate']);
+                                widget.productData['productName'],
+                                widget.productData['productId'],
+                                widget.productData['imageUrl'],
+                                1,
+                                widget.productData['quantity'],
+                                widget.productData['productPrice'],
+                                widget.productData['vendorId'],
+                                _selectedSize!,
+                              );
 
                               Get.snackbar(
                                 'ITEM ADDED',
@@ -545,7 +547,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: _cartProvider.getCartItem
+                      color: _cartProvider.getCartItems
                               .containsKey(widget.productData['productId'])
                           ? Colors.grey
                           : Colors.pink.shade900,
@@ -561,7 +563,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: _cartProvider.getCartItem
+                          child: _cartProvider.getCartItems
                                   .containsKey(widget.productData['productId'])
                               ? Text(
                                   'IN CART',

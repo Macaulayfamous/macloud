@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:provider/provider.dart';
 import 'package:uber_app/views/screens/main_Screen.dart';
@@ -11,18 +12,18 @@ import 'package:uuid/uuid.dart';
 import '../../../provider/cart_provider.dart';
 import 'edit_profile_screen.dart';
 
-class CheckoutScreen extends StatefulWidget {
+class CheckoutScreen extends ConsumerStatefulWidget {
   const CheckoutScreen({super.key});
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState();
+  _CheckoutScreenState createState() => _CheckoutScreenState();
 }
 
-class _CheckoutScreenState extends State<CheckoutScreen> {
+class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final CartProvider _cartProvider = Provider.of<CartProvider>(context);
+    final _cartProvider = ref.read(cartProvider.notifier);
     CollectionReference users = FirebaseFirestore.instance.collection('buyers');
 
     return FutureBuilder<DocumentSnapshot>(
@@ -55,10 +56,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
               body: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: _cartProvider.getCartItem.length,
+                  itemCount: _cartProvider.getCartItems.length,
                   itemBuilder: (context, index) {
                     final cartData =
-                        _cartProvider.getCartItem.values.toList()[index];
+                        _cartProvider.getCartItems.values.toList()[index];
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Card(
@@ -118,7 +119,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     onTap: () {
                       EasyLoading.show(status: 'Placing Order');
 
-                      _cartProvider.getCartItem.forEach((key, item) async {
+                      _cartProvider.getCartItems.forEach((key, item) async {
                         final orderId = Uuid().v4();
                         await _firestore.collection('orders').doc(orderId).set({
                           'orderId': orderId,
@@ -135,7 +136,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           'productImage': item.imageUrl,
                           'quantity': item.quantity,
                           'productSize': item.productSize,
-                          'scheduleDate': item.scheduleDate,
                           'orderDate': DateTime.now(),
                           'accepted': false,
                         }).whenComplete(() async {
@@ -174,7 +174,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             });
                           }
                           setState(() {
-                            _cartProvider.getCartItem.clear();
+                            _cartProvider.getCartItems.clear();
                           });
 
                           EasyLoading.dismiss();

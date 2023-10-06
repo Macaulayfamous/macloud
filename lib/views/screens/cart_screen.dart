@@ -1,27 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uber_app/provider/cart_provider.dart';
 
-import '../../provider/cart_provider.dart';
-import 'inner_screens/checkout_screen.dart';
-import 'main_Screen.dart';
-
-class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+class CartScreen extends ConsumerStatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final CartProvider _cartProvider = Provider.of<CartProvider>(context);
+  _CartScreenState createState() => _CartScreenState();
+}
 
+class _CartScreenState extends ConsumerState<CartScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final _cartProvider = ref.read(cartProvider.notifier);
+    final cartData = ref.watch(cartProvider);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink,
-        elevation: 0,
         title: Text(
-          'Cart Screen',
+          'Cart',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 4,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 5,
           ),
         ),
         actions: [
@@ -35,56 +36,48 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: _cartProvider.getCartItem.isNotEmpty
+      body: cartData.isNotEmpty
           ? ListView.builder(
               shrinkWrap: true,
-              itemCount: _cartProvider.getCartItem.length,
+              itemCount: cartData.length,
               itemBuilder: (context, index) {
-                final cartData =
-                    _cartProvider.getCartItem.values.toList()[index];
+                final cartItem = cartData.values.toList()[index];
 
-                return Card(
-                  child: SizedBox(
-                    height: 200,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: Image.network(cartData.imageUrl[0]),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    child: SizedBox(
+                      height: 200,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: Image.network(
+                              cartItem.imageUrl[0],
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  cartData.productName,
+                                  cartItem.productName,
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    letterSpacing: 5,
                                   ),
                                 ),
                                 Text(
-                                  '\$${cartData.price.toStringAsFixed(2)}',
+                                  cartItem.price.toStringAsFixed(2),
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    letterSpacing: 5,
                                     color: Colors.pink,
-                                  ),
-                                ),
-                                OutlinedButton(
-                                  onPressed: null,
-                                  child: Text(
-                                    cartData.productSize,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      letterSpacing: 1,
-                                    ),
                                   ),
                                 ),
                                 Row(
@@ -94,139 +87,81 @@ class CartScreen extends StatelessWidget {
                                       width: 120,
                                       decoration: BoxDecoration(
                                         color: Colors.pink,
+                                        borderRadius: BorderRadius.circular(
+                                          4,
+                                        ),
                                       ),
                                       child: Row(
                                         children: [
                                           IconButton(
-                                            onPressed: cartData.quantity == 1
-                                                ? null
-                                                : () {
-                                                    _cartProvider
-                                                        .decreaMent(cartData);
-                                                  },
+                                            onPressed: () {
+                                              _cartProvider.decrementItem(
+                                                  cartItem.productId);
+                                            },
                                             icon: Icon(
                                               CupertinoIcons.minus,
                                               color: Colors.white,
-                                              size: 18,
                                             ),
                                           ),
                                           Text(
-                                            cartData.quantity.toString(),
+                                            cartItem.quantity.toString(),
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
                                           IconButton(
-                                            onPressed: cartData
-                                                        .productQuantity ==
-                                                    cartData.quantity
-                                                ? null
-                                                : () {
-                                                    _cartProvider
-                                                        .increament(cartData);
-                                                  },
+                                            onPressed: () {
+                                              _cartProvider.incrementItem(
+                                                  cartItem.productId);
+                                            },
                                             icon: Icon(
                                               CupertinoIcons.plus,
                                               color: Colors.white,
-                                              size: 18,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
                                     IconButton(
                                       onPressed: () {
-                                        _cartProvider.removeItem(
-                                          cartData.productId,
-                                        );
+                                        _cartProvider
+                                            .removeItem(cartItem.productId);
                                       },
                                       icon: Icon(
-                                        CupertinoIcons.cart_badge_minus,
+                                        CupertinoIcons.delete,
                                       ),
-                                    ),
+                                    )
                                   ],
                                 )
                               ],
                             ),
-                          ),
-                        ),
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
-              },
-            )
+              })
           : Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Your Shopping Cart is Empty',
-                    textAlign: TextAlign.center,
+                    'Your Cart is Empty',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 5,
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MainScreen();
-                      }));
-                    },
-                    child: Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width - 40,
-                      decoration: BoxDecoration(
-                        color: Colors.pink,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'CONTINUE SHOPPING',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-      bottomNavigationBar: _cartProvider.totalPrice == 0.00
-          ? null
-          : Container(
-              height: 80,
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
                   Text(
-                    "Total: \$${_cartProvider.totalPrice.toStringAsFixed(2)}",
+                    "You haven't added any items to your Cart\n you can add from the home screen",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return CheckoutScreen();
-                      }));
-                    },
-                    child: Text(
-                      "CHECKOUT",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      color: Colors.blueGrey,
                     ),
                   ),
                 ],

@@ -1,89 +1,85 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uber_app/models/cart_attributes.dart';
 
-import '../models/cart_attributes.dart';
+final cartProvider =
+    StateNotifierProvider<CartNotifier, Map<String, CartModel>>(
+        (ref) => CartNotifier());
 
-class CartProvider with ChangeNotifier {
-  Map<String, CartAttr> _cartItems = {};
-
-  Map<String, CartAttr> get getCartItem {
-    return _cartItems;
-  }
-
-  double get totalPrice {
-    var total = 0.00;
-
-    _cartItems.forEach((key, value) {
-      total += value.price * value.quantity;
-    });
-
-    return total;
-  }
+class CartNotifier extends StateNotifier<Map<String, CartModel>> {
+  CartNotifier() : super({});
 
   void addProductToCart(
-      String productName,
-      String productId,
-      List imageUrl,
-      int quantity,
-      int productQuantity,
-      double price,
-      String vendorId,
-      String productSize,
-      Timestamp scheduleDate) {
-    if (_cartItems.containsKey(productId)) {
-      _cartItems.update(
-          productId,
-          (exitingCart) => CartAttr(
-              productName: exitingCart.productName,
-              productId: exitingCart.productId,
-              imageUrl: exitingCart.imageUrl,
-              quantity: exitingCart.quantity + 1,
-              productQuantity: exitingCart.productQuantity,
-              price: exitingCart.price,
-              vendorId: exitingCart.vendorId,
-              productSize: exitingCart.productSize,
-              scheduleDate: exitingCart.scheduleDate));
-
-      notifyListeners();
+    String productName,
+    String productId,
+    List imageUrl,
+    int quantity,
+    int productQuantity,
+    double price,
+    String vendorId,
+    String productSize,
+  ) {
+    if (state.containsKey(productId)) {
+      state = {
+        ...state,
+        productId: CartModel(
+          productName: state[productId]!.productName,
+          productId: state[productId]!.productId,
+          imageUrl: state[productId]!.imageUrl,
+          quantity: state[productId]!.quantity + 1,
+          productQuantity: state[productId]!.productQuantity,
+          price: state[productId]!.price,
+          vendorId: state[productId]!.vendorId,
+          productSize: state[productId]!.productSize,
+        )
+      };
     } else {
-      _cartItems.putIfAbsent(
-          productId,
-          () => CartAttr(
-              productName: productName,
-              productId: productId,
-              imageUrl: imageUrl,
-              quantity: quantity,
-              productQuantity: productQuantity,
-              price: price,
-              vendorId: vendorId,
-              productSize: productSize,
-              scheduleDate: scheduleDate));
-
-      notifyListeners();
+      state = {
+        ...state,
+        productId: CartModel(
+          productName: productName,
+          productId: productId,
+          imageUrl: imageUrl,
+          quantity: quantity,
+          productQuantity: productQuantity,
+          price: price,
+          vendorId: vendorId,
+          productSize: productSize,
+        )
+      };
     }
   }
 
-  void increament(CartAttr cartAttr) {
-    cartAttr.increase();
+  void incrementItem(String productId) {
+    if (state.containsKey(productId)) {
+      state[productId]!.quantity++;
 
-    notifyListeners();
+      ///notify listeners that the state has changed
+      ///
+      state = {...state};
+    }
   }
 
-  void decreaMent(CartAttr cartAttr) {
-    cartAttr.decrease();
+  void decrementItem(String productId) {
+    if (state.containsKey(productId)) {
+      state[productId]!.quantity--;
 
-    notifyListeners();
+      ///notify listeners that the state has changed
+      ///
+      state = {...state};
+    }
   }
 
-  removeItem(productId) {
-    _cartItems.remove(productId);
+  void removeItem(String productId) {
+    state.remove(productId);
 
-    notifyListeners();
+    state = {...state};
   }
 
-  removeAllItem() {
-    _cartItems.clear();
+  void removeAllItem() {
+    state.clear();
 
-    notifyListeners();
+    state = {...state};
   }
+
+  Map<String, CartModel> get getCartItems => state;
 }

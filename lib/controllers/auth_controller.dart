@@ -46,7 +46,6 @@ class AuthController extends GetxController {
 //FUNCTION TO CREATE NEW USER
   Future<String> createUser(
     String firstName,
-    String lastName,
     String email,
     String password,
     Uint8List? image,
@@ -66,7 +65,6 @@ class AuthController extends GetxController {
           'latitude': '',
           'placeName': '',
           'firstName': firstName,
-          'lastName': lastName,
           'email': email,
           'address': '',
           'userImage': profileImageUrl,

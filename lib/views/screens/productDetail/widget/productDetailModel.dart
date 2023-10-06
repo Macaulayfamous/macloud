@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uber_app/provider/favourite_provider.dart';
 import 'package:uber_app/views/screens/productDetail/product_detail_screen.dart';
 
-class ProductDetailModel extends StatelessWidget {
+class ProductDetailModel extends ConsumerStatefulWidget {
   const ProductDetailModel({
     Key? key,
     required this.prouctData,
@@ -16,13 +16,18 @@ class ProductDetailModel extends StatelessWidget {
   final double fem;
 
   @override
+  _ProductDetailModelState createState() => _ProductDetailModelState();
+}
+
+class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
+  @override
   Widget build(BuildContext context) {
-    final FavouriteProvider _wishList =
-        Provider.of<FavouriteProvider>(context, listen: true);
+     final _wishProvider = ref.read(favouriteProvider.notifier);
+    final wishItems = ref.watch(favouriteProvider);
 
     return GestureDetector(
       onTap: () {
-        Get.to(ProductDetailScreen(productData: prouctData));
+        Get.to(ProductDetailScreen(productData: widget.prouctData));
       },
       child: Stack(
         children: [
@@ -30,19 +35,20 @@ class ProductDetailModel extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: double.infinity,
-              height: 72 * fem,
+              height: 72 * widget.fem,
               decoration: BoxDecoration(
                 border: Border.all(color: Color(0xffdddddd)),
                 color: Color(0xffffffff),
                 boxShadow: [
                   BoxShadow(
                     color: Color(0x0f000000),
-                    offset: Offset(0 * fem, 4 * fem),
-                    blurRadius: 6 * fem,
+                    offset: Offset(0 * widget.fem, 4 * widget.fem),
+                    blurRadius: 6 * widget.fem,
                   ),
                 ],
                 borderRadius: BorderRadius.circular(
-                    8.0), // Add border radius for a rounded look
+                  8.0,
+                ),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,13 +56,14 @@ class ProductDetailModel extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      width: 48 * fem,
-                      height: 50 * fem,
+                      width: 48 * widget.fem,
+                      height: 50 * widget.fem,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(
-                            8.0), // Add border radius for a rounded look
+                          8.0,
+                        ),
                         child: Image.network(
-                          prouctData['imageUrl'][0],
+                          widget.prouctData['imageUrl'][0],
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -69,11 +76,11 @@ class ProductDetailModel extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          prouctData['productName'],
+                          widget.prouctData['productName'],
                           style: TextStyle(
                             fontSize: 21,
                             fontWeight: FontWeight.bold,
-                            letterSpacing: 0.525 * fem,
+                            letterSpacing: 0.525 * widget.fem,
                             color: Color(0xff000000),
                           ),
                           softWrap: false,
@@ -82,7 +89,7 @@ class ProductDetailModel extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          '\$${prouctData['productPrice'].toStringAsFixed(2)}',
+                          '\$${widget.prouctData['productPrice'].toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -101,32 +108,32 @@ class ProductDetailModel extends StatelessWidget {
             right: 15,
             top: 8,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () {
-                  _wishList.addProductToWish(
-                    prouctData['productName'],
-                    prouctData['productId'],
-                    prouctData['imageUrl'],
-                    1,
-                    prouctData['quantity'],
-                    prouctData['productPrice'],
-                    prouctData['vendorId'],
-                    '',
-                    prouctData['scheduleDate'],
-                  );
-                },
-                icon: _wishList.getwishItem.containsKey(prouctData['productId'])
-                    ? Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )
-                    : Icon(
-                        Icons.favorite_border,
-                        color: Colors.red,
-                      ),
-              ),
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {
+                    _wishProvider.addProductToWish(
+                      widget.prouctData['productName'],
+                      widget.prouctData['productId'],
+                      widget.prouctData['imageUrl'],
+                      1,
+                      widget.prouctData['quantity'],
+                      widget.prouctData['productPrice'],
+                      widget.prouctData['vendorId'],
+                      '',
+                      widget.prouctData['scheduleDate'],
+                    );
+                  },
+                  icon: _wishProvider.getwishItem
+                          .containsKey(widget.prouctData['productId'])
+                      ? Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : Icon(
+                          Icons.favorite_border,
+                          color: Colors.red,
+                        ),
+                )),
           )
         ],
       ),

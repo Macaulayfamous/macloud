@@ -3,7 +3,6 @@ import 'package:uber_app/views/screens/widgets/banner_widget.dart';
 import 'package:uber_app/views/screens/widgets/beauty_widget.dart';
 import 'package:uber_app/views/screens/widgets/category_text.dart';
 import 'package:uber_app/views/screens/widgets/customAppBar.dart';
-import 'package:uber_app/views/screens/widgets/new_products_widget.dart';
 import 'package:uber_app/views/screens/widgets/men_shoes.dart';
 import 'package:uber_app/views/screens/widgets/reuseText_widget.dart';
 
@@ -25,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 10,
           ),
-          BannerWidget(),
+          BannerArea(),
           SizedBox(
             height: 10,
           ),

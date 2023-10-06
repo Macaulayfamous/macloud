@@ -1,19 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uber_app/provider/favourite_provider.dart';
 
-import '../../provider/cart_provider.dart';
-import 'inner_screens/checkout_screen.dart';
-import 'main_Screen.dart';
-
-class WishListScreen extends StatelessWidget {
-  const WishListScreen({super.key});
+class WishListScreen extends ConsumerWidget {
+  const WishListScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final FavouriteProvider _wishProvider =
-        Provider.of<FavouriteProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _wishProvider = ref.read(favouriteProvider.notifier);
+    final wishItems = ref.watch(favouriteProvider);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,7 +26,7 @@ class WishListScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              _wishProvider.removeAllItem();
+              _wishProvider.removeAllItems();
             },
             icon: Icon(
               CupertinoIcons.delete,
@@ -37,13 +34,13 @@ class WishListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: _wishProvider.getwishItem.isNotEmpty
+      body: wishItems.isNotEmpty
           ? ListView.builder(
               shrinkWrap: true,
-              itemCount: _wishProvider.getwishItem.length,
+              itemCount: wishItems.length,
               itemBuilder: (context, index) {
-                final wishData =
-                    _wishProvider.getwishItem.values.toList()[index];
+                final wishData = wishItems.values.toList()[index];
+
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
@@ -70,7 +67,9 @@ class WishListScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '\$' + " " + wishData.price.toStringAsFixed(2),
+                                '\$' +
+                                    " " +
+                                    wishData.price.toStringAsFixed(2),
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

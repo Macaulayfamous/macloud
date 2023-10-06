@@ -97,48 +97,50 @@ class _MapScreenState extends State<MapScreen> {
                     Container(
                       width: MediaQuery.of(context).size.width - 70,
                       child: ElevatedButton.icon(
-                          onPressed: () async {
-                            double? latitude =
-                                Provider.of<AppData>(context, listen: false)
-                                    .pickUpAddress!
-                                    .latitude;
+                        onPressed: () async {
+                          print('test');
+                          double? latitude =
+                              Provider.of<AppData>(context, listen: false)
+                                  .pickUpAddress!
+                                  .latitude;
 
-                            double? logitude =
-                                Provider.of<AppData>(context, listen: false)
-                                    .pickUpAddress!
-                                    .longitude;
+                          double? logitude =
+                              Provider.of<AppData>(context, listen: false)
+                                  .pickUpAddress!
+                                  .longitude;
 
-                            String? placeName =
-                                Provider.of<AppData>(context, listen: false)
-                                    .pickUpAddress!
-                                    .placeName;
-                            EasyLoading.show(status: 'Saving Location...');
-                            await FirebaseFirestore.instance
-                                .collection('buyers')
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .update({
-                              'latitude': latitude,
-                              'longitude': logitude,
-                              'placeName': placeName,
-                            });
+                          String? placeName =
+                              Provider.of<AppData>(context, listen: false)
+                                  .pickUpAddress!
+                                  .placeName;
+                          EasyLoading.show(status: 'Saving Location...');
+                          await FirebaseFirestore.instance
+                              .collection('buyers')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'latitude': latitude,
+                            'longitude': logitude,
+                            'placeName': placeName,
+                          });
 
-                            EasyLoading.dismiss();
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return MainScreen();
-                            }));
-                          },
-                          icon: Icon(FontAwesomeIcons.shop),
-                          label: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Text(
-                              'SHOP NOW ',
-                              style: TextStyle(
-                                letterSpacing: 4,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          EasyLoading.dismiss();
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return MainScreen();
+                          }));
+                        },
+                        icon: Icon(FontAwesomeIcons.shop),
+                        label: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(
+                            'SHOP ME ',
+                            style: TextStyle(
+                              letterSpacing: 4,
+                              fontWeight: FontWeight.bold,
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 )),
