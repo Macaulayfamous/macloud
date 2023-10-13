@@ -92,8 +92,8 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Colors.yellow.shade900,
-                        Colors.yellow,
+                        Colors.pink.shade900,
+                        Colors.pink,
                       ],
                     ),
                   ),
@@ -256,6 +256,9 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                           decoration: InputDecoration(labelText: 'Tax Number'),
                         ),
                       ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     InkWell(
                       onTap: () {
                         _saveVendorDetail();
@@ -264,7 +267,7 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                         height: 30,
                         width: MediaQuery.of(context).size.width - 40,
                         decoration: BoxDecoration(
-                          color: Colors.yellow.shade900,
+                          color: Colors.pink,
                           borderRadius: BorderRadius.circular(
                             10,
                           ),

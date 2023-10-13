@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:uber_app/controllers/auth_controller.dart';
 import 'package:uber_app/provider/app_data.dart';
 import 'package:uber_app/vendor/controllers/banner_controller.dart';
-import 'package:uber_app/views/screens/auth/login_screen.dart';
 import 'package:uber_app/views/screens/auth/welcome_screen/welcome_register_screen.dart';
 
 void main() async {

@@ -16,13 +16,13 @@ class _EditAddressState extends State<EditAddress> {
 
   @override
   Widget build(BuildContext context) {
-    // if (Provider.of<AppData>(context).pickUpAddress != null) {
-    //   String _address =
-    //       Provider.of<AppData>(context).pickUpAddress!.placeName.toString();
+    if (Provider.of<AppData>(context).pickUpAddress != null) {
+      String _address =
+          Provider.of<AppData>(context).pickUpAddress!.placeName.toString();
 
-    //   _currentLocationController.text = _address;
-    // }
-    // ;
+      _currentLocationController.text = _address;
+    }
+    ;
 
     return Padding(
       padding: const EdgeInsets.only(top: 50, left: 20, right: 20),

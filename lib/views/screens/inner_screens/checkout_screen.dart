@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:provider/provider.dart';
 import 'package:uber_app/views/screens/main_Screen.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../provider/cart_provider.dart';
-import 'edit_profile_screen.dart';
 
 class CheckoutScreen extends ConsumerStatefulWidget {
   const CheckoutScreen({super.key});

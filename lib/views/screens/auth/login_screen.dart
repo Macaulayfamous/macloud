@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, bottomPadding),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Color(0xFFFF4081),
+            color: Colors.grey,
             image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage('assets/images/doorpng2.png'),
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     borderRadius:
                                         BorderRadius.circular(7 * fem),
                                     child: Image.asset(
-                                      'assets/images/maclay.png',
+                                      'assets/images/login-png-2-1-sGm.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.circular(10 * fem),
-                                      color: Color(0xfff2f2f2),
+                                      color: Colors.white,
                                     ),
                                     child: TextFormField(
                                       onChanged: (value) {
@@ -219,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.circular(10 * fem),
-                                      color: Color(0xfff2f2f2),
+                                      color: Colors.white,
                                     ),
                                     child: TextFormField(
                                       validator: (value) {
@@ -347,7 +347,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   width: double.infinity,
                                   height: 60 * fem,
                                   decoration: BoxDecoration(
-                                    color: Color(0xffffffff),
+                                    color: Colors.white,
                                     borderRadius:
                                         BorderRadius.circular(10 * fem),
                                   ),
@@ -356,7 +356,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ? Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: SpinKitFadingCircle(
-                                              color: Colors.pink,
+                                              color: Color(
+                                                0xFFFF4081,
+                                              ),
                                               size: 50.0,
                                             ),
                                           )
@@ -365,7 +367,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             style: TextStyle(
                                               fontSize: buttonFontSize,
                                               fontWeight: FontWeight.w500,
-                                              color: Color(0xff000000),
+                                              color: Colors.black,
                                             ),
                                           ),
                                   ),

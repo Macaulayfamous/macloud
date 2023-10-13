@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, bottomPadding),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xFFFF4081),
+              color: Colors.grey,
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/images/doorpng2.png'),
@@ -211,10 +211,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10 * fem),
-                                        color: Color(0xfff2f2f2),
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(10 * fem),
+                                          color: Colors.white),
                                       child: TextFormField(
                                         onChanged: (value) {
                                           firstName = value;
@@ -277,9 +276,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10 * fem),
-                                  color: Color(0xfff2f2f2),
-                                ),
+                                    borderRadius:
+                                        BorderRadius.circular(10 * fem),
+                                    color: Colors.white),
                                 child: TextFormField(
                                   onChanged: (value) {
                                     email = value;
@@ -341,9 +340,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10 * fem),
-                                  color: Color(0xfff2f2f2),
-                                ),
+                                    borderRadius:
+                                        BorderRadius.circular(10 * fem),
+                                    color: Colors.white),
                                 child: TextFormField(
                                   onChanged: (value) {
                                     password = value;
@@ -444,7 +443,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 style: TextStyle(
                                   fontSize: textSize,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                             ],
@@ -466,7 +465,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               width: double.infinity,
                               height: 60 * fem,
                               decoration: BoxDecoration(
-                                color: Color(0xffffffff),
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(10 * fem),
                               ),
                               child: Center(
@@ -483,7 +482,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         style: TextStyle(
                                           fontSize: buttonFontSize,
                                           fontWeight: FontWeight.w500,
-                                          color: Color(0xff000000),
+                                          color: Colors.black,
                                         ),
                                       ),
                               ),

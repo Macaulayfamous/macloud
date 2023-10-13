@@ -12,7 +12,6 @@ import 'package:uber_app/helpers/helper_methods.dart';
 import 'package:uber_app/views/screens/main_Screen.dart';
 
 import '../../provider/app_data.dart';
-import '../../vendor/views/screens/main_vendor_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -133,7 +132,7 @@ class _MapScreenState extends State<MapScreen> {
                         label: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Text(
-                            'SHOP ME ',
+                            'SHOP NOW ',
                             style: TextStyle(
                               letterSpacing: 4,
                               fontWeight: FontWeight.bold,

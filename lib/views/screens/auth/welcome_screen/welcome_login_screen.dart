@@ -1,4 +1,3 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +18,7 @@ class WelcomeLoginScreen extends StatelessWidget {
         height: screenHeight,
         clipBehavior: Clip.hardEdge,
         decoration: const BoxDecoration(
-          color: Color(0xFFFF4081),
+          color: Colors.grey,
         ),
         child: Stack(
           clipBehavior: Clip.none,
@@ -144,7 +143,7 @@ class WelcomeLoginScreen extends StatelessWidget {
                           text: 'Register',
                           style: GoogleFonts.getFont(
                             'Poppins',
-                            color: const Color(0xFF80BAFF),
+                            color: Colors.pink.shade900,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uber_app/provider/cart_provider.dart';
+import 'package:uber_app/views/screens/inner_screens/checkout_screen.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});
@@ -15,6 +16,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
   Widget build(BuildContext context) {
     final _cartProvider = ref.read(cartProvider.notifier);
     final cartData = ref.watch(cartProvider);
+    final totalAmount = ref.read(cartProvider.notifier).calculateTotalAmount();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -162,6 +164,47 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.blueGrey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+      bottomSheet: totalAmount == 0.0
+          ? SizedBox()
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CheckoutScreen();
+                      }));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.circular(
+                            9,
+                          )),
+                      child: Center(
+                        child: Text(
+                          'CHECKOUT' +
+                              " " +
+                              '\$' +
+                              totalAmount.toStringAsFixed(2),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 4,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

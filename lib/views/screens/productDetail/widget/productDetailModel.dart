@@ -27,7 +27,7 @@ class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
 
     return GestureDetector(
       onTap: () {
-        Get.to(ProductDetailScreen(productData: widget.prouctData));
+        Get.to(ProductDetailScreen(productData: widget.prouctData),);
       },
       child: Stack(
         children: [

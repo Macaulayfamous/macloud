@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:get/get.dart';
 import 'package:uber_app/views/screens/productDetail/product_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
