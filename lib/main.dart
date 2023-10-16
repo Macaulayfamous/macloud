@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:uber_app/cont/global_varaible.dart';
 import 'package:uber_app/controllers/auth_controller.dart';
 import 'package:uber_app/provider/app_data.dart';
 import 'package:uber_app/vendor/controllers/banner_controller.dart';
+import 'package:uber_app/views/screens/auth/login_screen.dart';
+import 'package:uber_app/views/screens/auth/register_screen.dart';
 import 'package:uber_app/views/screens/auth/welcome_screen/welcome_register_screen.dart';
+import 'package:uber_app/views/screens/main_Screen.dart';
 
 void main() async {
   // Ensure that Flutter is initialized.
@@ -20,6 +25,8 @@ void main() async {
     // Initialize your controllers or services here.
     // If you're using GetX, you can put your controllers here.
     Get.put(AuthController());
+
+    Stripe.publishableKey = "pk_test_51Nv0TYLcpVDSklU4eoI285cQsT6Lr0w0YuHR5Aaj2Tx8hhLtkBJS6adO2yC0kcAesDO9jfN0PK4sfcs6oelLXowX006uEcO1Dw";
   });
 
   // Wrap your app with ProviderScope to use Riverpod for state management.
@@ -49,7 +56,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: WelcomeRegisterScren(),
+      home: LoginScreen(),
       builder: EasyLoading.init(),
       initialBinding: BindingsBuilder(
         () {
