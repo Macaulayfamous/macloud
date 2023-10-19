@@ -25,6 +25,25 @@ class VendorController {
     return downloadUrl;
   }
 
+  Future<String> createVendor(
+    String email,
+    String password,
+  ) async {
+    String res = 'some error occured';
+
+    try {
+      //CREATE NEW USER IN FIREBASE AUTH
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+
+    return res;
+  }
+
 //FUNTION TO STORE IMAGE IN FIREBASE STORAGE ENDS HERE
 
   //FUNCTION TO PICK STORE IMAGE

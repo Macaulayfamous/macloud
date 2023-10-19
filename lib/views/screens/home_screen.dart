@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:uber_app/views/screens/widgets/banner_widget.dart';
 import 'package:uber_app/views/screens/widgets/beauty_widget.dart';
+import 'package:uber_app/views/screens/widgets/category_item.dart';
 import 'package:uber_app/views/screens/widgets/category_text.dart';
 import 'package:uber_app/views/screens/widgets/customAppBar.dart';
+import 'package:uber_app/views/screens/widgets/home_products.dart';
 import 'package:uber_app/views/screens/widgets/men_shoes.dart';
 import 'package:uber_app/views/screens/widgets/reuseText_widget.dart';
+import 'package:uber_app/views/screens/widgets/vendor_stores.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,21 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           CustomAppBar(),
-          SizedBox(
-            height: 10,
-          ),
           BannerArea(),
-          SizedBox(
-            height: 10,
+          VendorStore(),
+          CategoryItem(),
+          ResuseTextWidget(
+            title: 'All Products',
           ),
-          CategoryText(),
+          HomeproductWidget(),
           ResuseTextWidget(
             title: "Men's Shoes",
           ),
           MenShoes(),
-          SizedBox(
-            height: 10,
-          ),
           ResuseTextWidget(
             title: 'Beauty',
           ),

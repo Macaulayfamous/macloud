@@ -17,7 +17,7 @@ class AccountScreen extends StatelessWidget {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               elevation: 2,
-              backgroundColor: Colors.pink.shade900,
+              backgroundColor: Colors.yellow.shade900,
               title: Text(
                 'Profile',
                 style: TextStyle(letterSpacing: 4),
@@ -38,7 +38,7 @@ class AccountScreen extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     radius: 64,
-                    backgroundColor: Colors.pink.shade900,
+                    backgroundColor: Colors.yellow.shade900,
                     child: Icon(
                       Icons.person,
                       size: 50,
@@ -73,7 +73,7 @@ class AccountScreen extends StatelessWidget {
                     height: 40,
                     width: MediaQuery.of(context).size.width - 200,
                     decoration: BoxDecoration(
-                      color: Colors.pink.shade900,
+                      color: Colors.yellow.shade900,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Center(
@@ -109,7 +109,7 @@ class AccountScreen extends StatelessWidget {
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
                     elevation: 2,
-                    backgroundColor: Colors.pink.shade900,
+                    backgroundColor: Colors.yellow.shade900,
                     title: Text(
                       'Profile',
                       style: TextStyle(letterSpacing: 4),
@@ -130,7 +130,7 @@ class AccountScreen extends StatelessWidget {
                       Center(
                         child: CircleAvatar(
                           radius: 64,
-                          backgroundColor: Colors.pink.shade900,
+                          backgroundColor: Colors.yellow.shade900,
                           backgroundImage: NetworkImage(data['userImage']),
                         ),
                       ),
@@ -160,7 +160,7 @@ class AccountScreen extends StatelessWidget {
                           height: 40,
                           width: MediaQuery.of(context).size.width - 200,
                           decoration: BoxDecoration(
-                            color: Colors.pink.shade900,
+                            color: Colors.yellow.shade900,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Center(

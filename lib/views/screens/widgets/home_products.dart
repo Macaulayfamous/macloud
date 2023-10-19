@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../productDetail/widget/productDetailModel.dart';
 
 class HomeproductWidget extends StatelessWidget {
-  final String categoryName;
+  // final String categoryName;
 
-  const HomeproductWidget({super.key, required this.categoryName});
+  // const HomeproductWidget({super.key, required this.categoryName});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,8 @@ class HomeproductWidget extends StatelessWidget {
     
     final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', isEqualTo: categoryName)
-        .where('approved', isEqualTo: true)
+        // .where('category', isEqualTo: categoryName)
+        // .where('approved', isEqualTo: true)
         .snapshots();
     return StreamBuilder<QuerySnapshot>(
       stream: _productsStream,

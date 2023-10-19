@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:uber_app/models/categories_model.dart';
 
 import '../productDetail/product_detail_screen.dart';
 
 class AllProductScreen extends StatelessWidget {
-  final dynamic categoryData;
+  final CategoryModel categoryData;
 
   const AllProductScreen({super.key, required this.categoryData});
 
@@ -12,8 +13,8 @@ class AllProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', isEqualTo: categoryData['categoryName'])
-        .where('approved', isEqualTo: true)
+        .where('category', isEqualTo: categoryData.categoryName)
+        // .where('approved', isEqualTo: true)
         .snapshots();
 
     return Scaffold(
@@ -21,7 +22,7 @@ class AllProductScreen extends StatelessWidget {
         elevation: 1,
         backgroundColor: Colors.pink.shade900,
         title: Text(
-          categoryData['categoryName'],
+          categoryData.categoryName,
           style: TextStyle(
             letterSpacing: 6,
             fontWeight: FontWeight.bold,

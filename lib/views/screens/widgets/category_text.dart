@@ -92,9 +92,9 @@ class _CategoryTextState extends State<CategoryText> {
               );
             },
           ),
-          if (_selectedCategory == null) NewProductWidget(),
-          if (_selectedCategory != null)
-            HomeproductWidget(categoryName: _selectedCategory!),
+          // if (_selectedCategory == null) NewProductWidget(),
+          // if (_selectedCategory != null)
+            // HomeproductWidget(categoryName: _selectedCategory!),
         ],
       ),
     );

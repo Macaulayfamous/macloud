@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uber_app/controllers/category_controller.dart';
+import 'package:uber_app/views/screens/inner_screens/all_product_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({Key? key});
@@ -51,18 +52,25 @@ class CategoryItem extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 50,
-            child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, // Always 4 columns
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0, // Adjust spacing as needed
-              ),
-              itemCount: categoryController.categories.length,
-              itemBuilder: (context, index) {
-                return Column(
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4, // Always 4 columns
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0, // Adjust spacing as needed
+            ),
+            itemCount: categoryController.categories.length,
+            itemBuilder: (context, index) {
+         
+              return InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AllProductScreen(
+                        categoryData: categoryController.categories[index]);
+                  }));
+                },
+                child: Column(
                   children: [
                     Container(
                       width: screenWidth * 0.18,
@@ -79,7 +87,8 @@ class CategoryItem extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Image.network(
-                          categoryController.categories[index].categoryImage,
+                          categoryController.categories[index].categoryImage
+                              .toString(),
                           width: screenWidth * 0.18,
                           height: screenWidth * 0.18,
                           fit: BoxFit.cover,
@@ -91,7 +100,8 @@ class CategoryItem extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: [
                         Text(
-                          categoryController.categories[index].categoryName,
+                          categoryController.categories[index].categoryName
+                              .toString(),
                           textAlign: TextAlign.center,
                           style: GoogleFonts.getFont(
                             'Poppins',
@@ -104,9 +114,9 @@ class CategoryItem extends StatelessWidget {
                       ],
                     )
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       );

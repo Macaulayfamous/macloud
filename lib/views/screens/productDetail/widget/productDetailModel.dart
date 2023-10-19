@@ -22,7 +22,7 @@ class ProductDetailModel extends ConsumerStatefulWidget {
 class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
   @override
   Widget build(BuildContext context) {
-     final _wishProvider = ref.read(favouriteProvider.notifier);
+    final _wishProvider = ref.read(favouriteProvider.notifier);
     final wishItems = ref.watch(favouriteProvider);
 
     return GestureDetector(

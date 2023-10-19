@@ -6,8 +6,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uber_app/cont/global_varaible.dart';
-import 'package:uber_app/views/screens/main_Screen.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../provider/cart_provider.dart';
@@ -62,7 +60,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   }
 
   Future<String> createStripeCustomer(String email, String name) async {
-    try   {
+    try {
       final response = await http.post(
         Uri.parse('https://api.stripe.com/v1/customers'),
         headers: {

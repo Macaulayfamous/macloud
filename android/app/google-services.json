@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "638944811878",
-    "project_id": "uber-app-d8d96",
-    "storage_bucket": "uber-app-d8d96.appspot.com"
+    "project_number": "290380138399",
+    "project_id": "multi-vendor-app-959e1",
+    "storage_bucket": "multi-vendor-app-959e1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:638944811878:android:babf64114c75b1ea49c6a7",
+        "mobilesdk_app_id": "1:290380138399:android:1d1d085d39c25dcda29faa",
         "android_client_info": {
           "package_name": "com.macaulayfamoys.uber_app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "638944811878-u29g5eg2fvhh88s226okkmrqotvc7jv8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyADJUWrckiPyfQbiSymNKoFomPW6wkxvUE"
+          "current_key": "AIzaSyBeDq0m-s7LgrYw00LO-w67F1ATtfYKHKo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "638944811878-u29g5eg2fvhh88s226okkmrqotvc7jv8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

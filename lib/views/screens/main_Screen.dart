@@ -38,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.pink,
+        selectedItemColor: Colors.yellow.shade900,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(

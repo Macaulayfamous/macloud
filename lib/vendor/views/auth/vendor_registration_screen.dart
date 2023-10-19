@@ -1,5 +1,4 @@
 import 'package:country_state_city_picker/country_state_city_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class VendorRegistrationScreen extends StatefulWidget {
 
 class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final VendorController _vendorController = VendorController();
   late String countryValue;
 
@@ -85,6 +83,7 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 200,
             flexibleSpace: LayoutBuilder(builder: (context, constraints) {
               return FlexibleSpaceBar(
@@ -92,7 +91,7 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Colors.pink.shade900,
+                        Colors.yellow.shade900,
                         Colors.pink,
                       ],
                     ),
@@ -267,7 +266,7 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                         height: 30,
                         width: MediaQuery.of(context).size.width - 40,
                         decoration: BoxDecoration(
-                          color: Colors.pink,
+                          color: Colors.yellow.shade900,
                           borderRadius: BorderRadius.circular(
                             10,
                           ),

@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, bottomPadding),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Colors.yellow.shade900,
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/images/doorpng2.png'),
@@ -208,43 +208,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10 * fem),
-                                          color: Colors.white),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          firstName = value;
-                                        },
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return 'Please enter your full name';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
-                                          disabledBorder: InputBorder.none,
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              20 * fem,
-                                              18 * fem,
-                                              25.58 * fem,
-                                              18 * fem),
-                                          hintText: 'Input your full name',
-                                          hintStyle: TextStyle(
-                                              color: Color(0xffbcbcbc)),
-                                        ),
-                                        style: TextStyle(
-                                          fontSize: textFieldFontSize,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff000000),
-                                        ),
+                                    TextFormField(
+                                      onChanged: (value) {
+                                        firstName = value;
+                                      },
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter your full name';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(9)),
+                                        // focusedBorder: InputBorder.none,
+                                        // enabledBorder: InputBorder.none,
+                                        // errorBorder: InputBorder.none,
+                                        // disabledBorder: InputBorder.none,
+                                        contentPadding: EdgeInsets.fromLTRB(
+                                            20 * fem,
+                                            18 * fem,
+                                            25.58 * fem,
+                                            18 * fem),
+                                        hintText: 'Input your full name',
+                                        hintStyle:
+                                            TextStyle(color: Color(0xffbcbcbc)),
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: textFieldFontSize,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff000000),
                                       ),
                                     ),
                                   ],
@@ -273,45 +270,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(10 * fem),
-                                    color: Colors.white),
-                                child: TextFormField(
-                                  onChanged: (value) {
-                                    email = value;
-                                  },
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter your email address';
-                                    } else if (!value.contains('@')) {
-                                      return 'Please enter a valid email address';
-                                    }
-                                    return null;
-                                  },
-                                  maxLines: null,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    disabledBorder: InputBorder.none,
-                                    contentPadding: EdgeInsets.fromLTRB(
-                                        20 * fem,
-                                        18 * fem,
-                                        25.58 * fem,
-                                        18 * fem),
-                                    hintText: 'Input your email@hmail.com',
-                                    hintStyle:
-                                        TextStyle(color: Color(0xffbcbcbc)),
+                              TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                onChanged: (value) {
+                                  email = value;
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your email address';
+                                  } else if (!value.contains('@')) {
+                                    return 'Please enter a valid email address';
+                                  }
+                                  return null;
+                                },
+                                maxLines: null,
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      9,
+                                    ),
                                   ),
-                                  style: TextStyle(
-                                    fontSize: textFieldFontSize,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff000000),
-                                  ),
+                                  // focusedBorder: InputBorder.none,
+                                  // enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.fromLTRB(20 * fem,
+                                      18 * fem, 25.58 * fem, 18 * fem),
+                                  hintText: 'Input your email@hmail.com',
+                                  hintStyle:
+                                      TextStyle(color: Color(0xffbcbcbc)),
+                                ),
+                                style: TextStyle(
+                                  fontSize: textFieldFontSize,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff000000),
                                 ),
                               ),
                               // Display error message
@@ -337,42 +331,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(10 * fem),
-                                    color: Colors.white),
-                                child: TextFormField(
-                                  onChanged: (value) {
-                                    password = value;
-                                  },
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter your password';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    disabledBorder: InputBorder.none,
-                                    contentPadding: EdgeInsets.fromLTRB(
-                                        20 * fem,
-                                        18 * fem,
-                                        24.6 * fem,
-                                        18 * fem),
-                                    hintText: 'Input your password',
-                                    hintStyle:
-                                        TextStyle(color: Color(0xffbcbcbc)),
+                              TextFormField(
+                                obscureText: true,
+                                onChanged: (value) {
+                                  password = value;
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9),
                                   ),
-                                  style: TextStyle(
-                                    fontSize: textFieldFontSize,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff000000),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9),
                                   ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9),
+                                  ),
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20 * fem, 18 * fem, 24.6 * fem, 18 * fem),
+                                  hintText: 'Input your password',
+                                  hintStyle:
+                                      TextStyle(color: Color(0xffbcbcbc)),
+                                ),
+                                style: TextStyle(
+                                  fontSize: textFieldFontSize,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff000000),
                                 ),
                               ),
                               // Display error message

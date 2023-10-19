@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uber_app/vendor/views/auth/vendor_auth.dart';
+import 'package:uber_app/vendor/views/auth/vendor_register.dart';
 import 'package:uber_app/views/screens/auth/register_screen.dart';
 import 'package:uber_app/views/screens/auth/welcome_screen/welcome_login_screen.dart';
 
@@ -18,8 +18,8 @@ class WelcomeRegisterScren extends StatelessWidget {
         width: screenWidth,
         height: screenHeight,
         clipBehavior: Clip.hardEdge,
-        decoration: const BoxDecoration(
-          color: Colors.grey,
+        decoration: BoxDecoration(
+          color: Colors.yellow.shade900,
         ),
         child: Stack(
           clipBehavior: Clip.none,
@@ -38,7 +38,7 @@ class WelcomeRegisterScren extends StatelessWidget {
               left: screenWidth * 0.024,
               top: screenHeight * 0.151,
               child: Image.asset(
-                'assets/images/login-png-2-1-sGm.png',
+                 'assets/images/Illustration.png',
                 width: screenWidth * 0.92,
                 height: screenHeight * 0.523,
                 fit: BoxFit.cover,
@@ -93,7 +93,7 @@ class WelcomeRegisterScren extends StatelessWidget {
               top: screenHeight * 0.77,
               child: InkWell(
                 onTap: () {
-                  Get.to(VendorAuthScreen());
+                  Get.to(VendorRegisterScreen());
                 },
                 child: Container(
                   width: screenWidth * 0.85,
@@ -149,7 +149,7 @@ class WelcomeRegisterScren extends StatelessWidget {
                           text: 'Login',
                           style: GoogleFonts.getFont(
                             'Poppins',
-                            color: Colors.pink.shade900,
+                            color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

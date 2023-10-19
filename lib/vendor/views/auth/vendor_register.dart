@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uber_app/controllers/auth_controller.dart';
-import 'package:uber_app/views/screens/map_screen.dart';
+import 'package:uber_app/vendor/controllers/vendor_register_controller.dart';
+import 'package:uber_app/vendor/views/auth/vendor_login_screen.dart';
+import 'package:uber_app/vendor/views/screens/landing_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class LoginScreen extends StatefulWidget {
+class VendorRegisterScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<VendorRegisterScreen> createState() => _VendorLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _VendorLoginScreenState extends State<VendorRegisterScreen> {
   bool saveMe = false;
 
   void toggleSaveMe() {
@@ -18,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  final AuthController _authController = AuthController();
+  final VendorController _vendorController = VendorController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late String email;
@@ -27,12 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isLoading = false;
 
-  loginUser() async {
+  createUser() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
-      String res = await _authController.loginUser(email, password);
+      String res = await _vendorController.createVendor(email, password);
 
       setState(() {
         _isLoading = false;
@@ -43,10 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
           _isLoading = false;
         });
 
-        Get.to(MapScreen());
+        Get.to(VendorLoginScreen());
         Get.snackbar(
-          'Login Success',
-          'You Are Now logged in',
+          'Account Success',
+          'Account Has Been Created For You',
           backgroundColor: Colors.pink,
           colorText: Colors.white,
         );
@@ -220,6 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   TextFormField(
+                                    keyboardType: TextInputType.text,
                                     obscureText: true,
                                     validator: (value) {
                                       if (value!.isNotEmpty) {
@@ -346,7 +349,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   3 * fem, 0 * fem, 4 * fem, 24 * fem),
                               child: TextButton(
                                 onPressed: () {
-                                  loginUser();
+                                  createUser();
                                 },
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.zero,

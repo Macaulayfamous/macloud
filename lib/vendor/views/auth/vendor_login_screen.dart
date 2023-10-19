@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uber_app/controllers/auth_controller.dart';
-import 'package:uber_app/views/screens/map_screen.dart';
+import 'package:uber_app/vendor/views/screens/landing_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class LoginScreen extends StatefulWidget {
+class VendorLoginScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<VendorLoginScreen> createState() => _VendorLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _VendorLoginScreenState extends State<VendorLoginScreen> {
   bool saveMe = false;
 
   void toggleSaveMe() {
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _isLoading = false;
         });
 
-        Get.to(MapScreen());
+        Get.to(LandingScreen());
         Get.snackbar(
           'Login Success',
           'You Are Now logged in',

@@ -35,7 +35,7 @@ class _UploadScreenState extends State<UploadScreen> {
     String? placeName = Provider.of<AppData>(context).pickUpAddress!.placeName;
 
     return DefaultTabController(
-      length: 5,
+      length: 4,
       child: Form(
         key: _formKey,
         child: Scaffold(
@@ -47,16 +47,22 @@ class _UploadScreenState extends State<UploadScreen> {
                 child: Text('General'),
               ),
               Tab(
-                child: Text('Shipping'),
+                child: Text(
+                  'Shipping',
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
               Tab(
-                child: Text('Attribute'),
+                child: Text(
+                  'Attribute',
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
               Tab(
-                child: Text('Images'),
-              ),
-              Tab(
-                child: Text('Video'),
+                child: Text(
+                  'Images',
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
             ]),
           ),

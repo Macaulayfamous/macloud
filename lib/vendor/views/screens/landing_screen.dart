@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_app/vendor/views/screens/vendorMapScreen.dart';
-
-import '../../../views/screens/map_screen.dart';
 import '../../models/vendor_user_models.dart';
-import '../auth/vendor_register_screen.dart';
+import '../auth/vendor_registration_screen.dart';
 
 
 class LandingScreen extends StatelessWidget {

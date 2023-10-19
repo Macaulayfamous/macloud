@@ -19,6 +19,9 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     final totalAmount = ref.read(cartProvider.notifier).calculateTotalAmount();
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.yellow.shade900,
+        automaticallyImplyLeading: false,
         title: Text(
           'Cart',
           style: TextStyle(
@@ -79,7 +82,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.pink,
+                                    color: Colors.yellow.shade900,
                                   ),
                                 ),
                                 Row(
@@ -88,7 +91,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                       height: 40,
                                       width: 120,
                                       decoration: BoxDecoration(
-                                        color: Colors.pink,
+                                        color: Colors.yellow.shade900,
                                         borderRadius: BorderRadius.circular(
                                           4,
                                         ),
@@ -187,7 +190,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                       width: MediaQuery.of(context).size.width - 50,
                       height: 50,
                       decoration: BoxDecoration(
-                          color: Colors.pink,
+                          color: Colors.yellow.shade900,
                           borderRadius: BorderRadius.circular(
                             9,
                           )),

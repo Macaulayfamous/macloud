@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uber_app/vendor/views/auth/vendor_login_screen.dart';
+import 'package:uber_app/vendor/views/auth/vendor_register.dart';
 import 'package:uber_app/views/screens/auth/login_screen.dart';
 import 'package:uber_app/views/screens/auth/welcome_screen/welcome_register_screen.dart';
 
@@ -17,8 +19,8 @@ class WelcomeLoginScreen extends StatelessWidget {
         width: screenWidth,
         height: screenHeight,
         clipBehavior: Clip.hardEdge,
-        decoration: const BoxDecoration(
-          color: Colors.grey,
+        decoration: BoxDecoration(
+          color: Colors.yellow.shade900,
         ),
         child: Stack(
           clipBehavior: Clip.none,
@@ -37,7 +39,7 @@ class WelcomeLoginScreen extends StatelessWidget {
               left: screenWidth * 0.024,
               top: screenHeight * 0.151,
               child: Image.asset(
-                'assets/images/login-png-2-1-sGm.png',
+                'assets/images/Illustration.png',
                 width: screenWidth * 0.92,
                 height: screenHeight * 0.523,
                 fit: BoxFit.cover,
@@ -90,23 +92,28 @@ class WelcomeLoginScreen extends StatelessWidget {
             Positioned(
               left: screenWidth * 0.07,
               top: screenHeight * 0.77,
-              child: Container(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.085,
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(9),
-                ),
-                child: Center(
-                  // Center the text vertically and horizontally
-                  child: Text(
-                    'Login As Seller',
-                    style: GoogleFonts.getFont(
-                      'Poppins',
-                      color: Colors.black,
-                      fontSize: screenHeight * 0.022,
-                      fontWeight: FontWeight.w500,
+              child: InkWell(
+                onTap: () {
+                  Get.to(() => VendorLoginScreen());
+                },
+                child: Container(
+                  width: screenWidth * 0.85,
+                  height: screenHeight * 0.085,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: Center(
+                    // Center the text vertically and horizontally
+                    child: Text(
+                      'Login As Seller',
+                      style: GoogleFonts.getFont(
+                        'Poppins',
+                        color: Colors.black,
+                        fontSize: screenHeight * 0.022,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
@@ -143,7 +150,7 @@ class WelcomeLoginScreen extends StatelessWidget {
                           text: 'Register',
                           style: GoogleFonts.getFont(
                             'Poppins',
-                            color: Colors.pink.shade900,
+                            color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
